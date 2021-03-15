@@ -19,9 +19,9 @@ set(__versioning_helpers YES)
 
 #
 # Simple logging function used in this module only.
-include("${CMAKE_BINARY_DIR}/cmake-modules/Logger.cmake")
+include("${CMAKE_MODULES_LIB_PATH}/Logger.cmake")
 function(write_log string)
-  log("[versionCheckHelpers]: ${string}")
+  log("[VersioningHelpers.cmake]: ${string}")
 endfunction(write_log string)
 
 
