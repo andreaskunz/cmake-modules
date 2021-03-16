@@ -5,7 +5,8 @@
 # versioning of libraries and dependency management.
 #
 # Dependencies:
-# * GitVersionFetcher.cmake
+# * lib/GitVersionFetcher.cmake
+# * Logger.cmake
 #
 
 cmake_minimum_required(VERSION 3.10)
@@ -18,8 +19,14 @@ set(__versioning_helpers YES)
 
 
 #
+# Includes
+include(Logger)
+include(lib/GitVersionFetcher)
+
+
+
+#
 # Simple logging function used in this module only.
-include("${CMAKE_MODULES_LIB_PATH}/Logger.cmake")
 function(write_log string)
   log("[VersioningHelpers.cmake]: ${string}")
 endfunction(write_log string)
@@ -33,7 +40,6 @@ endfunction(write_log string)
 # Usage: setLibraryVersion()
 #
 function(setLibraryVersion)
-  include("${CMAKE_MODULES_LIB_PATH}/lib/GitVersionFetcher.cmake")
   fetch_version_from_git()
   set(VERSION_MAJOR ${VERSION_MAJOR} PARENT_SCOPE)
   set(VERSION_MINOR ${VERSION_MINOR} PARENT_SCOPE)

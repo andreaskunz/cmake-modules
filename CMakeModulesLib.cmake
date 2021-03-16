@@ -5,8 +5,8 @@ if(__cmake_modules_lib)
 endif()
 set(__cmake_modules_lib YES)
 
-# Include core library modules
-include("${CMAKE_MODULES_LIB_PATH}/Logger.cmake")
+# Includes
+include(Logger)
 
 
 # Checks out the specified version of the library

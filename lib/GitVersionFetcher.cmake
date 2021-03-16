@@ -29,6 +29,7 @@
 
 cmake_minimum_required(VERSION 3.10)
 
+
 if(__git_version_fetcher)
   return()
 endif()
