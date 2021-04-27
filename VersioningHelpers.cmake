@@ -106,10 +106,13 @@ endfunction(createPackageFiles)
 #                       ${RECOMMENDED_MYLIB_VERSION} ${REQUIRED_MYLIB_VERSION})
 #        find_package(my-lib ${VERSION_TO_FIND} EXACT)
 #
+# Note: The requiredVersion must take the form major.minor[.patch[.tweak]]. This means
+#       the patch and tweak numbers are optional.
+#
 function(setVersionToFind modulename variablename recommendedVersion)
   if(NOT ${ARGC} EQUAL 4 OR
      NOT ${ARGV3} MATCHES
-       "^(0|[1-9][0-9]*)[.](0|[1-9][0-9]*)[.](0|[1-9][0-9]*)[.](0|[1-9][0-9]*)$")
+       "^(0|[1-9][0-9]*)[.](0|[1-9][0-9]*)([.](0|[1-9][0-9]*))?([.](0|[1-9][0-9]*))?$")
 
     write_log("${variablename} variable was not set or is no valid version number")
     write_log("Using recommended ${modulename} version, which is: v${recommendedVersion}")
@@ -152,4 +155,37 @@ function(checkIfModuleFound modulename variablename)
 
   endif()
 endfunction(checkIfModuleFound modulename)
+
+
+
+#
+# Checks the version compatibility up to a desired degree
+#
+# Parameter:
+# version1           - the version one to comapare
+# version1           - the version two to comapare
+# degree             - the desired degree to check the version compatibility
+#
+# Triggers a FATAL_ERROR if the versions do not match
+#
+# Usage: checkVersionCompatibility("1.0" "1.0.2" 2)
+#
+function(checkVersionCompatibility version1 version2 degree)
+    write_log("check version compatibility of v${version1} and v${version2}")
+    # create lists with the version elements
+    string(REPLACE "." ";" VERS1 ${version1})
+    string(REPLACE "." ";" VERS2 ${version2})
+
+    # loop and compare
+    math(EXPR LOOP_DEGREE "${degree}-1")
+    foreach(i RANGE ${LOOP_DEGREE})
+      list(GET V1 ${i} VERS1)
+      list(GET V2 ${i} VERS1)
+      if(NOT ${V1} EQUAL ${V2})
+        message(FATAL_ERROR "Version v${version1} does not match "
+                " v${version2} to the required degree of ${degree}.")
+      endif()
+    endforeach()
+    write_log("version check passed to a degree of ${degree}.")
+endfunction(checkVersionCompatibility modulename degree)
 
