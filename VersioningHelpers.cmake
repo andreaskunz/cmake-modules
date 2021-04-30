@@ -147,7 +147,7 @@ endfunction(setVersionToFind requiredVersion recommendedVersion modulename)
 #
 function(checkIfModuleFound modulename variablename)
   if(${modulename}_FOUND) # set by find_package()
-     write_log("Version check done; v${VERSION_TO_FIND} found.")
+     write_log("Version check done. v${${modulename}_VERSION} found.")
 
   else()
     message(FATAL_ERROR "Make sure the required ${modulename} version is available "
