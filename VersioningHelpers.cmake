@@ -179,8 +179,8 @@ function(checkVersionCompatibility version1 version2 degree)
     # loop and compare
     math(EXPR LOOP_DEGREE "${degree}-1")
     foreach(i RANGE ${LOOP_DEGREE})
-      list(GET V1 ${i} VERS1)
-      list(GET V2 ${i} VERS1)
+      list(GET VERS1 ${i} V1)
+      list(GET VERS2 ${i} V2)
       if(NOT ${V1} EQUAL ${V2})
         message(FATAL_ERROR "Version v${version1} does not match "
                 " v${version2} to the required degree of ${degree}.")
