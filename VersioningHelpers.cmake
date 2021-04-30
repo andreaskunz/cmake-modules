@@ -187,5 +187,5 @@ function(checkVersionCompatibility version1 version2 degree)
       endif()
     endforeach()
     write_log("version check passed to a degree of ${degree}.")
-endfunction(checkVersionCompatibility modulename degree)
+endfunction(checkVersionCompatibility version1 version2 degree)
 
