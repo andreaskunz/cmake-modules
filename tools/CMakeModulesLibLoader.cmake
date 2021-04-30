@@ -24,7 +24,7 @@
 #  limitations under the License.
 # 
 #
-#  v0.1.0
+#  v0.1.1
 #
 
 
@@ -43,7 +43,7 @@ function(load_cmake_modules_lib)
     message(FATAL_ERROR "git not found!")
   endif()
 
-  if(${ARGC} EQUAL 1 AND ${ARGV0})
+  if(${ARGC} EQUAL 1 AND ARGV0)
     set(LIB_CMAKE_MODULES_URL ${ARGV0} CACHE STRING "The path to the origin of the cmake-modules library")
   endif()
 
