@@ -78,7 +78,7 @@ function(createPackageFiles inFileName includeInstallDir libInstallDir)
   write_basic_package_version_file(
     "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}ConfigVersion.cmake"
     VERSION ${LIBRARY_VERSION}
-    COMPATIBILITY ExactVersion)
+    COMPATIBILITY SameMajorVersion) # assuming SemVer compliance
 
   install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}Config.cmake
     ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}ConfigVersion.cmake
